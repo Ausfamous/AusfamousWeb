@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 20% 4%;
+    --foreground: 40 10% 90%;
+    --card: 40 10% 8%;
+    --card-foreground: 40 10% 90%;
+    --popover: 40 10% 8%;
+    --popover-foreground: 40 10% 90%;
+    --primary: 42 70% 47%;
+    --primary-foreground: 40 20% 4%;
+    --secondary: 40 10% 10%;
+    --secondary-foreground: 40 10% 90%;
+    --muted: 40 10% 12%;
+    --muted-foreground: 40 10% 55%;
+    --accent: 42 70% 47%;
+    --accent-foreground: 40 20% 4%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 42 20% 15%;
+    --input: 42 20% 15%;
+    --ring: 42 70% 47%;
+    --chart-1: 42 70% 47%;
+    --chart-2: 42 50% 60%;
+    --chart-3: 40 10% 30%;
+    --chart-4: 42 40% 70%;
+    --chart-5: 40 10% 50%;
+    --radius: 0.25rem;
+    --sidebar-background: 40 20% 4%;
+    --sidebar-foreground: 40 10% 90%;
+    --sidebar-primary: 42 70% 47%;
+    --sidebar-primary-foreground: 40 20% 4%;
+    --sidebar-accent: 40 10% 10%;
+    --sidebar-accent-foreground: 40 10% 90%;
+    --sidebar-border: 42 20% 15%;
+    --sidebar-ring: 42 70% 47%;
+
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --gold: #C5A059;
+    --gold-light: #D4B77A;
+    --gold-dark: #A68419;
+    --obsidian: #0A0B0D;
+    --graphene: #14161A;
+    --platinum: #E2E2E2;
+  }
+
+  .dark {
+    --background: 40 20% 4%;
+    --foreground: 40 10% 90%;
+    --card: 40 10% 8%;
+    --card-foreground: 40 10% 90%;
+    --popover: 40 10% 8%;
+    --popover-foreground: 40 10% 90%;
+    --primary: 42 70% 47%;
+    --primary-foreground: 40 20% 4%;
+    --secondary: 40 10% 10%;
+    --secondary-foreground: 40 10% 90%;
+    --muted: 40 10% 12%;
+    --muted-foreground: 40 10% 55%;
+    --accent: 42 70% 47%;
+    --accent-foreground: 40 20% 4%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 42 20% 15%;
+    --input: 42 20% 15%;
+    --ring: 42 70% 47%;
+    --chart-1: 42 70% 47%;
+    --chart-2: 42 50% 60%;
+    --chart-3: 40 10% 30%;
+    --chart-4: 42 40% 70%;
+    --chart-5: 40 10% 50%;
+    --sidebar-background: 40 20% 4%;
+    --sidebar-foreground: 40 10% 90%;
+    --sidebar-primary: 42 70% 47%;
+    --sidebar-primary-foreground: 40 20% 4%;
+    --sidebar-accent: 40 10% 10%;
+    --sidebar-accent-foreground: 40 10% 90%;
+    --sidebar-border: 42 20% 15%;
+    --sidebar-ring: 42 70% 47%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0A0B0D; }
+::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 3px; }
+
+/* Custom animations */
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes pulse-gold { 0%,100% { box-shadow: 0 0 0 0 rgba(197,160,89,0.4); } 50% { box-shadow: 0 0 20px 10px rgba(197,160,89,0); } }
+@keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes scroll-right { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+@keyframes fade-in-up { from { opacity:0; transform: translateY(40px); } to { opacity:1; transform: translateY(0); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-pulse-gold { animation: pulse-gold 2s ease-in-out infinite; }
+.animate-scroll-left { animation: scroll-left 40s linear infinite; }
+.animate-scroll-right { animation: scroll-right 40s linear infinite; }
+.font-display { font-family: var(--font-display); }
