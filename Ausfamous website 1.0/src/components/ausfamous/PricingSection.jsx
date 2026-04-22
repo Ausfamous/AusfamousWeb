@@ -7,9 +7,11 @@ const ONE_OFF_PLANS = [
     name: 'Visibility Launch',
     badge: null,
     featured: false,
+    heritage: false,
     desc: 'For professionals building their foundation in the Australian market.',
     price: '890',
     priceLabel: 'one-off',
+    ctaLabel: 'Apply for Access',
     features: [
       'Personal brand strategy session',
       'Social media profile optimisation (2 platforms)',
@@ -17,16 +19,22 @@ const ONE_OFF_PLANS = [
       '1 media pitch per month',
       'Google presence baseline setup',
       'Bilingual content available on request',
+      'Brand positioning brief',
+      'Initial digital authority audit',
     ],
   },
   {
     name: 'Media + Social',
     badge: 'Most Popular',
+    secondBadge: 'Million Views Guaranteed',
     featured: true,
+    heritage: false,
     desc: 'For professionals ready to dominate their industry with a full media and social presence.',
     price: '3,697',
     priceLabel: 'one-off',
+    ctaLabel: 'Apply for Access',
     features: [
+      'Everything in Visibility Launch, plus:',
       'Full brand architecture and narrative framework',
       'Social media management across LinkedIn, YouTube, Facebook, Reddit',
       'Weekly content creation and posting',
@@ -34,16 +42,17 @@ const ONE_OFF_PLANS = [
       'Google review and search authority growth',
       'Multilingual content across 2 language groups',
       'Podcast placement strategy',
-      'Quarterly strategy review',
     ],
   },
   {
     name: 'Supercharged Media + Social',
     badge: null,
     featured: false,
+    heritage: false,
     desc: 'For leaders building a global reputation and long-term authority at maximum scale.',
     price: '7,860',
     priceLabel: 'one-off',
+    ctaLabel: 'Apply for Access',
     features: [
       'Everything in Media + Social, plus:',
       'Dedicated brand strategist',
@@ -57,267 +66,419 @@ const ONE_OFF_PLANS = [
   },
 ];
 
+const ANNUAL_PLANS = [
+  {
+    name: 'Foundation',
+    badge: null,
+    featured: false,
+    heritage: false,
+    desc: 'For professionals establishing a credible and consistent presence.',
+    price: '798',
+    priceLabel: 'per month',
+    subNote: 'Billed quarterly — save $598/year',
+    ctaLabel: 'Apply for Access',
+    outcome: 'A credible, consistent presence that reflects your true level.',
+    features: [
+      'Authority audit and positioning brief',
+      'Monthly strategic direction',
+      'Initial digital profile optimisation',
+      'Structured content cadence',
+      'Foundational visibility and media support',
+      'Ongoing presence refinement',
+      'Brand narrative foundation',
+      'Quarterly progress review',
+    ],
+  },
+  {
+    name: 'Ascent',
+    badge: null,
+    featured: false,
+    heritage: false,
+    desc: 'For professionals building recognition and upward momentum.',
+    price: '1,598',
+    priceLabel: 'per month',
+    subNote: 'Billed quarterly — save $1,194/year',
+    ctaLabel: 'Apply for Access',
+    outcome: 'You move from visibility into recognition and trust.',
+    features: [
+      'Everything in Foundation, plus:',
+      'Refined positioning and narrative development',
+      'Ongoing digital biography evolution',
+      'Bi-weekly strategic alignment',
+      'Authored content creation and publication',
+      'Structured media positioning',
+      'Reputation management and search growth',
+      'Multilingual presence across key markets',
+    ],
+  },
+  {
+    name: 'The Summit',
+    badge: 'Most Chosen',
+    secondBadge: 'Million Views Guaranteed',
+    featured: true,
+    heritage: false,
+    desc: 'For professionals establishing clear authority within their field.',
+    price: '3,840',
+    priceLabel: 'per month',
+    subNote: 'Billed quarterly — save $11,520/year',
+    ctaLabel: 'Apply for Access',
+    outcome: 'You become the recognised standard in your space.',
+    features: [
+      'Everything in Ascent, plus:',
+      'Full authority and positioning strategy',
+      'Managed presence across all major platforms and Instagram authority channels',
+      'Priority media pitching with active feature placement',
+      'Advanced competitor intelligence and positioning',
+      'Target persona mapping and influence pathways',
+      'Awards and association positioning',
+      'Concierge-level support',
+    ],
+  },
+  {
+    name: 'Heritage',
+    badge: 'Private Mandate',
+    featured: false,
+    heritage: true,
+    desc: 'For individuals and principals requiring sustained authority at scale.',
+    price: '25,600',
+    priceLabel: 'per month',
+    subNote: 'Billed quarterly — save $76,800/year · By invitation only',
+    ctaLabel: 'Apply by Invitation',
+    outcome: 'Authority that compounds across markets, carried before you speak.',
+    features: [
+      'Everything in The Summit, plus:',
+      'Private mandate over narrative, presence, and perception',
+      'Bi-weekly executive-level strategic direction',
+      'International media positioning and visibility expansion',
+      'High-level competitor intelligence and market control',
+      'Precision audience mapping and influence structuring',
+      'Thought leadership and long-form narrative development',
+      'Strictly limited client allocation',
+    ],
+  },
+];
+
 const MONTHLY_PLANS = [
   {
-    name: 'Starter',
+    name: 'Foundation',
     badge: null,
     featured: false,
-    desc: 'For professionals building consistent market visibility each month.',
+    heritage: false,
+    desc: 'For professionals establishing a credible and consistent presence.',
     price: '997',
     priceLabel: 'per month',
-    annualPrice: '798',
-    annualSaving: '2,394',
+    ctaLabel: 'Apply for Access',
+    outcome: 'A credible, consistent presence that reflects your true level.',
     features: [
-      'Monthly strategy alignment and direction',
-      'Social media management on 2 priority channels',
-      'Weekly content publishing cadence',
-      'Monthly media outreach sprint',
-      'Monthly reporting and optimisation',
-      'Flexible language support on request',
+      'Authority audit and positioning brief',
+      'Monthly strategic direction',
+      'Initial digital profile optimisation',
+      'Structured content cadence',
+      'Foundational visibility and media support',
+      'Ongoing presence refinement',
+      'Brand narrative foundation',
+      'Quarterly progress review',
     ],
   },
   {
-    name: 'Momentum',
+    name: 'Ascent',
     badge: null,
     featured: false,
-    desc: 'For professionals scaling influence with steady, measurable momentum.',
+    heritage: false,
+    desc: 'For professionals building recognition and upward momentum.',
     price: '1,997',
     priceLabel: 'per month',
-    annualPrice: '1,598',
-    annualSaving: '4,794',
+    ctaLabel: 'Apply for Access',
+    outcome: 'You move from visibility into recognition and trust.',
     features: [
-      'Advanced brand positioning and narrative updates',
-      'Multi-platform management across LinkedIn, YouTube, Facebook, Reddit',
-      'Weekly content creation, editing, and posting',
-      'Ongoing media pitching and placement support',
-      'Google search and reputation growth actions',
-      'Multilingual content across 2 language groups',
-      'Quarterly authority growth review',
+      'Everything in Foundation, plus:',
+      'Refined positioning and narrative development',
+      'Ongoing digital biography evolution',
+      'Bi-weekly strategic alignment',
+      'Authored content creation and publication',
+      'Structured media positioning',
+      'Reputation management and search growth',
+      'Multilingual presence across key markets',
     ],
   },
   {
-    name: 'Authority Engine',
-    badge: null,
-    featured: false,
-    desc: 'For professionals who want to lead every conversation in their industry.',
-    price: '3,997',
-    priceLabel: 'per month',
-    annualPrice: '3,198',
-    annualSaving: '9,594',
-    features: [
-      'Full-spectrum brand domination strategy',
-      'All platforms managed — LinkedIn, YouTube, Facebook, Reddit + more',
-      'Daily content creation, editing, and publishing',
-      'Priority media pitching and feature placement',
-      'Multilingual content across 3 language groups',
-      'Dedicated senior strategist and weekly check-ins',
-      'Podcast, speaking, and award submission support',
-      'Real-time analytics and authority dashboard',
-    ],
-  },
-  {
-    name: 'Authority Domination',
+    name: 'The Summit',
     badge: 'Most Chosen',
+    secondBadge: 'Million Views Guaranteed',
     featured: true,
-    desc: 'For industry leaders who demand total market dominance and sustained authority.',
-    price: '6,997',
+    heritage: false,
+    desc: 'For professionals establishing clear authority within their field.',
+    price: '4,800',
     priceLabel: 'per month',
-    annualPrice: '5,598',
-    annualSaving: '16,794',
+    ctaLabel: 'Apply for Access',
+    outcome: 'You become the recognised standard in your space.',
     features: [
-      'Everything in Authority Engine, plus:',
-      'Dedicated senior strategist and monthly 1:1 sessions',
-      'International visibility and media opportunities',
-      'Thought-leadership content and video scripting support',
-      'Priority execution across all active channels',
-      'Executive-level strategic advisory access',
+      'Everything in Ascent, plus:',
+      'Full authority and positioning strategy',
+      'Managed presence across all major platforms and Instagram authority channels',
+      'Priority media pitching with active feature placement',
+      'Advanced competitor intelligence and positioning',
+      'Target persona mapping and influence pathways',
+      'Awards and association positioning',
+      'Concierge-level support',
     ],
   },
   {
-    name: 'Market Ownership',
-    badge: null,
+    name: 'Heritage',
+    badge: 'Private Mandate',
     featured: false,
-    desc: 'For organisations and principals who require full-market brand dominance at the highest level.',
-    price: null,
+    heritage: true,
+    desc: 'For individuals and principals requiring sustained authority at scale.',
+    price: '32,000',
     priceLabel: 'per month',
-    annualPrice: null,
-    annualSaving: '28,560',
+    subNote: 'By invitation or referral only',
+    ctaLabel: 'Apply by Invitation',
+    outcome: 'Authority that compounds across markets, carried before you speak.',
     features: [
-      'Bespoke engagement — fully customised scope',
-      'Dedicated team across strategy, content, and media',
-      'Unlimited platform and language coverage',
-      'Board and executive personal brand management',
-      'International and national media domination',
-      'Direct access to founding team',
+      'Everything in The Summit, plus:',
+      'Private mandate over narrative, presence, and perception',
+      'Bi-weekly executive-level strategic direction',
+      'International media positioning and visibility expansion',
+      'High-level competitor intelligence and market control',
+      'Precision audience mapping and influence structuring',
+      'Thought leadership and long-form narrative development',
+      'Strictly limited client allocation',
     ],
   },
 ];
 
 // ─── Card Component ───────────────────────────────────────────
-function PricingCard({ plan, isAnnual }) {
+function PricingCard({ plan, index }) {
+  const [hovered, setHovered] = useState(false);
+
   const scrollTo = (id) => {
     const el = document.querySelector(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const isHeritage = plan.heritage;
+  const isFeatured = plan.featured;
+
+  // Card background & border based on tier
+  const cardBg = isHeritage
+    ? 'linear-gradient(160deg, #1A1510 0%, #0E0C09 100%)'
+    : isFeatured
+    ? 'linear-gradient(160deg, #FDFBF4 0%, #F8F4EA 100%)'
+    : '#FFFFFF';
+
+  const cardBorder = isHeritage
+    ? hovered ? 'rgba(197,160,89,0.5)' : 'rgba(197,160,89,0.22)'
+    : isFeatured
+    ? hovered ? 'rgba(184,150,46,0.65)' : 'rgba(184,150,46,0.40)'
+    : hovered ? 'rgba(184,150,46,0.32)' : 'rgba(184,150,46,0.14)';
+
+  const nameColor = isHeritage ? '#D4B77A' : isFeatured ? '#6B4F10' : '#1A1510';
+  const descColor = isHeritage ? 'rgba(210,195,160,0.52)' : 'rgba(30,25,15,0.48)';
+  const priceColor = isHeritage ? '#C5A059' : isFeatured ? '#8A6E1E' : '#1A1510';
+  const labelColor = isHeritage ? 'rgba(210,195,160,0.40)' : 'rgba(30,25,15,0.35)';
+  const featureColor = isHeritage ? 'rgba(210,195,160,0.65)' : isFeatured ? 'rgba(40,30,10,0.70)' : 'rgba(30,25,15,0.55)';
+  const dividerColor = isHeritage ? 'rgba(197,160,89,0.15)' : 'rgba(184,150,46,0.10)';
+  const checkBg = isHeritage ? 'rgba(197,160,89,0.14)' : isFeatured ? 'rgba(184,150,46,0.18)' : 'rgba(184,150,46,0.08)';
+
+  const ctaBg = isFeatured
+    ? hovered ? '#9A7218' : '#B8962E'
+    : isHeritage
+    ? hovered ? 'rgba(197,160,89,0.22)' : 'rgba(197,160,89,0.12)'
+    : hovered ? 'rgba(184,150,46,0.09)' : 'transparent';
+  const ctaColor = isHeritage ? '#D4B77A' : isFeatured ? '#fff' : '#8A6E1E';
+  const ctaBorder = isFeatured ? 'transparent' : isHeritage ? 'rgba(197,160,89,0.38)' : 'rgba(184,150,46,0.38)';
+
   return (
     <div
-      className={`pricing-card flex flex-col relative ${plan.featured ? 'featured' : ''}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className={`pricing-card flex flex-col relative ${isFeatured ? 'featured' : ''}`}
       style={{
-        background: plan.featured ? '#FDFBF5' : '#FFFFFF',
-        border: `1px solid ${plan.featured ? 'rgba(184,150,46,0.38)' : 'rgba(184,150,46,0.13)'}`,
-        borderRadius: '4px',
-        padding: 'clamp(24px,4vw,32px)',
-        transition: 'transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease',
+        background: cardBg,
+        border: `1px solid ${cardBorder}`,
+        borderRadius: '12px',
+        padding: 'clamp(28px,4vw,36px)',
+        transition: 'transform 360ms cubic-bezier(0.16,1,0.3,1), box-shadow 360ms cubic-bezier(0.16,1,0.3,1), border-color 360ms ease',
+        transform: hovered ? 'translateY(-5px)' : 'translateY(0)',
+        boxShadow: hovered
+          ? isHeritage
+            ? '0 20px 60px rgba(0,0,0,0.35), 0 4px 20px rgba(197,160,89,0.14)'
+            : isFeatured
+            ? '0 20px 55px rgba(184,150,46,0.16), 0 4px 20px rgba(184,150,46,0.10)'
+            : '0 14px 40px rgba(0,0,0,0.07), 0 4px 14px rgba(184,150,46,0.07)'
+          : isHeritage
+          ? '0 8px 32px rgba(0,0,0,0.28)'
+          : isFeatured
+          ? '0 6px 24px rgba(184,150,46,0.08)'
+          : 'none',
+        animationDelay: `${index * 80}ms`,
+        animationFillMode: 'both',
       }}
     >
-      {/* Featured top rule */}
-      {plan.featured && (
+      {/* Sovereign top bar */}
+      {isFeatured && (
         <div style={{
           position: 'absolute',
-          top: 0,
-          left: '16%',
-          width: '68%',
-          height: '2px',
+          top: 0, left: '12%', width: '76%', height: '2px',
           background: 'linear-gradient(to right, transparent, #B8962E, transparent)',
         }} />
       )}
 
-      {/* Badge row — always same height */}
-      <div style={{ minHeight: '26px', marginBottom: '14px' }}>
-        {plan.badge ? (
+      {/* Heritage top bar */}
+      {isHeritage && (
+        <div style={{
+          position: 'absolute',
+          top: 0, left: '8%', width: '84%', height: '1px',
+          background: 'linear-gradient(to right, transparent, rgba(197,160,89,0.6), transparent)',
+        }} />
+      )}
+
+      {/* Badge row */}
+      <div style={{ minHeight: '28px', marginBottom: '16px', display: 'flex', flexWrap: 'wrap', gap: '6px', alignItems: 'center' }}>
+        {plan.badge && (
           <span style={{
             fontFamily: "'DM Sans', sans-serif",
-            fontSize: '9px',
+            fontSize: '8.5px',
             fontWeight: 700,
-            letterSpacing: '0.15em',
+            letterSpacing: '0.20em',
             textTransform: 'uppercase',
-            padding: '3px 11px',
-            borderRadius: '2px',
-            background: plan.featured ? '#B8962E' : 'rgba(184,150,46,0.09)',
-            color: plan.featured ? '#fff' : '#8A6E1E',
-            border: plan.featured ? 'none' : '1px solid rgba(184,150,46,0.32)',
+            padding: '4px 12px',
+            borderRadius: '1px',
+            background: isHeritage
+              ? 'rgba(197,160,89,0.14)'
+              : isFeatured
+              ? '#B8962E'
+              : 'rgba(184,150,46,0.08)',
+            color: isHeritage ? '#C5A059' : isFeatured ? '#fff' : '#8A6E1E',
+            border: isHeritage
+              ? '1px solid rgba(197,160,89,0.32)'
+              : isFeatured
+              ? 'none'
+              : '1px solid rgba(184,150,46,0.28)',
             display: 'inline-block',
           }}>
             {plan.badge}
           </span>
-        ) : null}
+        )}
+        {plan.secondBadge && (
+          <span style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: '8.5px',
+            fontWeight: 700,
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase',
+            padding: '4px 12px',
+            borderRadius: '1px',
+            background: 'transparent',
+            color: isFeatured ? '#B8962E' : '#C5A059',
+            border: `1px solid ${isFeatured ? 'rgba(184,150,46,0.50)' : 'rgba(197,160,89,0.40)'}`,
+            display: 'inline-block',
+          }}>
+            {plan.secondBadge}
+          </span>
+        )}
       </div>
 
       {/* Plan name */}
       <h3 style={{
         fontFamily: "'Cormorant Garamond', serif",
-        fontSize: '22px',
+        fontSize: 'clamp(22px,2.2vw,28px)',
         fontWeight: 600,
-        color: '#1A1510',
-        lineHeight: 1.2,
-        marginBottom: '8px',
+        color: nameColor,
+        lineHeight: 1.15,
+        marginBottom: '10px',
+        letterSpacing: '0.01em',
       }}>
         {plan.name}
       </h3>
 
-      {/* Description */}
+      {/* Desc */}
       <p style={{
         fontFamily: "'DM Sans', sans-serif",
         fontSize: '13px',
         fontWeight: 300,
-        color: 'rgba(30,25,15,0.50)',
-        lineHeight: 1.7,
-        marginBottom: '22px',
+        color: descColor,
+        lineHeight: 1.75,
+        marginBottom: '24px',
       }}>
         {plan.desc}
       </p>
 
-      {/* Price */}
-      <div style={{ marginBottom: '24px', paddingBottom: '24px', borderBottom: '1px solid rgba(184,150,46,0.12)' }}>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px', flexWrap: 'wrap' }}>
-          {(isAnnual ? plan.annualPrice : plan.price) ? (
-            <>
-              <span style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontSize: '42px',
-                fontWeight: 700,
-                color: plan.featured ? '#8A6E1E' : '#1A1510',
-                letterSpacing: '-0.02em',
-                lineHeight: 1,
-              }}>
-                ${isAnnual ? plan.annualPrice : plan.price}
-              </span>
-              <span style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: '11px',
-                fontWeight: 400,
-                color: 'rgba(30,25,15,0.35)',
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase',
-              }}>
-                {isAnnual ? 'per month' : plan.priceLabel}
-              </span>
-            </>
-          ) : (
-            <span style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: '32px',
-              fontWeight: 600,
-              color: plan.featured ? '#8A6E1E' : '#1A1510',
-              letterSpacing: '-0.01em',
-              lineHeight: 1,
-            }}>
-              Call to discuss
-            </span>
-          )}
+      {/* Price block */}
+      <div style={{
+        marginBottom: '26px',
+        paddingBottom: '26px',
+        borderBottom: `1px solid ${dividerColor}`,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: '7px', flexWrap: 'wrap' }}>
+          <span style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: isHeritage ? '38px' : 'clamp(36px,4vw,46px)',
+            fontWeight: 700,
+            color: priceColor,
+            letterSpacing: '-0.02em',
+            lineHeight: 1,
+          }}>
+            ${plan.price}
+          </span>
+          <span style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: '11px',
+            fontWeight: 400,
+            color: labelColor,
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+          }}>
+            {plan.priceLabel}
+          </span>
         </div>
-        {isAnnual && (
+        {plan.subNote && (
           <p style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: '11px',
-            fontWeight: 300,
-            color: 'rgba(30,25,15,0.40)',
-            marginTop: '6px',
-            lineHeight: 1.5,
+            color: 'rgba(197,160,89,0.50)',
+            marginTop: '7px',
+            letterSpacing: '0.05em',
+            fontStyle: 'italic',
           }}>
-            {plan.annualPrice
-              ? <>Billed monthly, annual lock-in &nbsp;·&nbsp; <strong style={{ color: '#8A6E1E' }}>save ${plan.annualSaving}/year</strong></>
-              : <strong style={{ color: '#8A6E1E', fontSize: '12px' }}>Save ${plan.annualSaving}/year, strongest annual ROI</strong>
-            }
+            {plan.subNote}
           </p>
         )}
       </div>
 
       {/* Features */}
-      <ul style={{ flex: 1, listStyle: 'none', padding: 0, margin: '0 0 24px 0' }} role="list">
+      <ul style={{ flex: 1, listStyle: 'none', padding: 0, margin: '0 0 22px 0' }} role="list">
         {plan.features.map((feature, i) => (
           <li key={i} style={{
             display: 'flex',
             alignItems: 'flex-start',
-            gap: '10px',
+            gap: '11px',
             padding: '7px 0',
-            borderBottom: i < plan.features.length - 1 ? '1px solid rgba(184,150,46,0.08)' : 'none',
+            borderBottom: i < plan.features.length - 1 ? `1px solid ${dividerColor}` : 'none',
           }}>
-            <span
-              aria-hidden="true"
-              style={{
-                flexShrink: 0,
-                width: '15px',
-                height: '15px',
-                borderRadius: '50%',
-                border: '1px solid rgba(184,150,46,0.36)',
-                background: plan.featured ? 'rgba(184,150,46,0.16)' : 'rgba(184,150,46,0.09)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginTop: '2px',
-              }}
-            >
-              <svg width="7" height="5" viewBox="0 0 7 5" fill="none">
-                <polyline points="0.5,2.5 2.5,4.5 6.5,0.5" stroke="#B8962E" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            <span aria-hidden="true" style={{
+              flexShrink: 0,
+              width: '14px',
+              height: '14px',
+              borderRadius: '50%',
+              border: `1px solid ${isHeritage ? 'rgba(197,160,89,0.30)' : 'rgba(184,150,46,0.32)'}`,
+              background: checkBg,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: '3px',
+            }}>
+              <svg width="6" height="5" viewBox="0 0 7 5" fill="none">
+                <polyline points="0.5,2.5 2.5,4.5 6.5,0.5"
+                  stroke={isHeritage ? '#C5A059' : '#B8962E'}
+                  strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
             <span style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: '13px',
-              color: plan.featured ? 'rgba(50,40,20,0.72)' : 'rgba(30,25,15,0.55)',
-              lineHeight: 1.5,
+              color: featureColor,
+              lineHeight: 1.55,
             }}>
               {feature}
             </span>
@@ -325,44 +486,51 @@ function PricingCard({ plan, isAnnual }) {
         ))}
       </ul>
 
+      {/* Outcome */}
+      {plan.outcome && (
+        <div style={{ margin: '0 0 22px 0' }}>
+          <p style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: '9.5px',
+            fontWeight: 700,
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase',
+            color: isHeritage ? 'rgba(197,160,89,0.70)' : 'rgba(184,150,46,0.55)',
+            marginBottom: '6px',
+          }}>What you achieve</p>
+          <p style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontSize: '15px',
+            fontWeight: 500,
+            fontStyle: 'italic',
+            color: isHeritage ? 'rgba(210,195,160,0.72)' : isFeatured ? 'rgba(30,25,15,0.72)' : 'rgba(30,25,15,0.56)',
+            lineHeight: 1.5,
+          }}>
+            {plan.outcome}
+          </p>
+        </div>
+      )}
+
       {/* CTA */}
       <button
         onClick={() => scrollTo('#contact')}
-        className="pricing-cta"
         style={{
           width: '100%',
-          padding: '13px 24px',
+          padding: '14px 24px',
           fontFamily: "'DM Sans', sans-serif",
-          fontSize: '11px',
+          fontSize: '10.5px',
           fontWeight: 700,
-          letterSpacing: '0.14em',
+          letterSpacing: '0.16em',
           textTransform: 'uppercase',
-          borderRadius: '2px',
+          borderRadius: '8px',
           cursor: 'pointer',
-          transition: 'all 200ms ease',
-          background: plan.featured ? '#B8962E' : 'transparent',
-          color: plan.featured ? '#fff' : '#8A6E1E',
-          border: plan.featured ? '1px solid #B8962E' : '1px solid rgba(184,150,46,0.42)',
-        }}
-        onMouseEnter={e => {
-          if (plan.featured) {
-            e.currentTarget.style.background = '#A0821A';
-            e.currentTarget.style.borderColor = '#A0821A';
-            e.currentTarget.style.boxShadow = '0 6px 24px rgba(184,150,46,0.28)';
-          } else {
-            e.currentTarget.style.background = 'rgba(184,150,46,0.07)';
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 4px 16px rgba(184,150,46,0.10)';
-          }
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.background = plan.featured ? '#B8962E' : 'transparent';
-          e.currentTarget.style.borderColor = plan.featured ? '#B8962E' : 'rgba(184,150,46,0.42)';
-          e.currentTarget.style.boxShadow = 'none';
-          e.currentTarget.style.transform = 'none';
+          transition: 'all 280ms cubic-bezier(0.16,1,0.3,1)',
+          background: ctaBg,
+          color: ctaColor,
+          border: `1px solid ${ctaBorder}`,
         }}
       >
-        Book Free Strategy Call
+        {plan.ctaLabel || 'Apply for Access'}
       </button>
     </div>
   );
@@ -370,10 +538,10 @@ function PricingCard({ plan, isAnnual }) {
 
 // ─── Main Section ─────────────────────────────────────────────
 export default function PricingSection() {
-  const [sectionRef, visible] = useScrollReveal(0.08);
+  const [sectionRef, visible] = useScrollReveal(0.05);
   const [activeTab, setActiveTab] = useState('monthly');
   const [displayTab, setDisplayTab] = useState('monthly');
-  const [gridPhase, setGridPhase] = useState('in'); // 'out' | 'in'
+  const [gridPhase, setGridPhase] = useState('in');
   const tabRefs = useRef({});
   const pillRef = useRef(null);
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
@@ -384,17 +552,13 @@ export default function PricingSection() {
     { key: 'annual', label: 'Annual', badge: 'Save 20%' },
   ];
 
-  // Update sliding pill position
   useEffect(() => {
     const el = tabRefs.current[activeTab];
     const pill = pillRef.current;
     if (el && pill) {
       const pillRect = pill.getBoundingClientRect();
       const elRect = el.getBoundingClientRect();
-      setPillStyle({
-        left: elRect.left - pillRect.left - 4,
-        width: elRect.width,
-      });
+      setPillStyle({ left: elRect.left - pillRect.left - 4, width: elRect.width });
     }
   }, [activeTab]);
 
@@ -405,11 +569,10 @@ export default function PricingSection() {
       setDisplayTab(key);
       setActiveTab(key);
       setGridPhase('in');
-    }, 220);
+    }, 240);
   };
 
-  const plans = displayTab === 'oneoff' ? ONE_OFF_PLANS : MONTHLY_PLANS;
-  const isAnnual = displayTab === 'annual';
+  const plans = displayTab === 'oneoff' ? ONE_OFF_PLANS : displayTab === 'annual' ? ANNUAL_PLANS : MONTHLY_PLANS;
 
   const scrollTo = (id) => {
     const el = document.querySelector(id);
@@ -421,72 +584,85 @@ export default function PricingSection() {
       id="pricing"
       ref={sectionRef}
       style={{
-        background: '#FEFCF8',
-        padding: 'clamp(80px,8vw,110px) 0 clamp(80px,8vw,100px)',
+        backgroundImage: 'url(https://media.base44.com/images/public/69d7417eefb273dfd04436bb/a293fd6be_AusfamousPricingBG.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        padding: 'clamp(90px,9vw,120px) 0 clamp(90px,9vw,110px)',
         position: 'relative',
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(36px)',
-        transition: 'opacity 850ms cubic-bezier(0.16,1,0.3,1), transform 850ms cubic-bezier(0.16,1,0.3,1)',
+        transform: visible ? 'translateY(0)' : 'translateY(28px)',
+        transition: 'opacity 900ms cubic-bezier(0.16,1,0.3,1), transform 900ms cubic-bezier(0.16,1,0.3,1)',
       }}
     >
-      {/* Top gold rule */}
+      {/* Dark overlay over background image */}
       <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: '1px',
-        background: 'linear-gradient(to right, transparent, rgba(184,150,46,0.35), transparent)',
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(160deg, rgba(10,9,7,0.88) 0%, rgba(15,12,8,0.82) 50%, rgba(10,9,7,0.90) 100%)',
+        pointerEvents: 'none',
+        zIndex: 0,
       }} />
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 clamp(20px,5vw,40px)' }}>
+      {/* Decorative rules */}
+      <div style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: '1px',
+        background: 'linear-gradient(to right, transparent, rgba(197,160,89,0.40), transparent)',
+        zIndex: 1,
+      }} />
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, right: 0, height: '1px',
+        background: 'linear-gradient(to right, transparent, rgba(197,160,89,0.20), transparent)',
+        zIndex: 1,
+      }} />
+
+      <div style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 clamp(20px,5vw,48px)', position: 'relative', zIndex: 1 }}>
 
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '52px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '56px' }}>
+          {/* Ornament */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '22px' }}>
+            <div style={{ width: '40px', height: '1px', background: 'rgba(184,150,46,0.35)' }} />
+            <div style={{ width: '5px', height: '5px', transform: 'rotate(45deg)', background: '#B8962E', opacity: 0.6 }} />
+            <div style={{ width: '40px', height: '1px', background: 'rgba(184,150,46,0.35)' }} />
+          </div>
+
           <p style={{
             fontFamily: "'DM Sans', sans-serif",
             fontSize: '10px',
             fontWeight: 700,
-            letterSpacing: '0.22em',
+            letterSpacing: '0.26em',
             textTransform: 'uppercase',
             color: '#B8962E',
             marginBottom: '18px',
           }}>
-            Packages
+            Mandates & Retainers
           </p>
           <h2 style={{
             fontFamily: "'Cormorant Garamond', serif",
-            fontSize: 'clamp(34px,4.5vw,56px)',
+            fontSize: 'clamp(36px,4.5vw,58px)',
             fontWeight: 600,
-            color: '#1A1510',
-            lineHeight: 1.08,
+            color: '#E8DFC8',
+            lineHeight: 1.06,
             letterSpacing: '-0.015em',
-            marginBottom: '16px',
+            marginBottom: '18px',
           }}>
             Control how the world sees you.
           </h2>
           <p style={{
             fontFamily: "'DM Sans', sans-serif",
-            fontSize: '15px',
+            fontSize: '14px',
             fontWeight: 300,
-            color: 'rgba(30,25,15,0.50)',
-            lineHeight: 1.8,
-            maxWidth: '500px',
-            margin: '0 auto 10px',
+            color: 'rgba(220,205,170,0.55)',
+            lineHeight: 1.85,
+            maxWidth: '460px',
+            margin: '0 auto',
           }}>
-            All packages include a Free Personal Brand Strategy Consultation before any commitment. Pricing is confirmed after your strategy call.
-          </p>
-          <p style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: '11.5px',
-            color: 'rgba(30,25,15,0.32)',
-          }}>
-            Choose the structure that fits your growth stage. Save 20% with Annual plans.
+            All engagements begin with a complimentary brand strategy consultation. Pricing is confirmed after your call.
           </p>
         </div>
 
-        {/* Toggle */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', marginBottom: '48px' }}>
+        {/* Tab Toggle */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', marginBottom: '52px' }}>
           <div
             ref={pillRef}
             role="tablist"
@@ -494,29 +670,24 @@ export default function PricingSection() {
               position: 'relative',
               display: 'inline-flex',
               alignItems: 'center',
-              background: '#F5F1E8',
-              border: '1px solid rgba(184,150,46,0.20)',
-              borderRadius: '40px',
+              background: 'rgba(20,16,10,0.75)',
+              border: '1px solid rgba(197,160,89,0.22)',
+              backdropFilter: 'blur(8px)',
+              borderRadius: '2px',
               padding: '4px',
-              overflowX: 'auto',
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none',
             }}
           >
-            {/* Sliding active pill */}
             <div style={{
               position: 'absolute',
               top: '4px',
               height: 'calc(100% - 8px)',
-              left: `${pillStyle.left}px`,
+              left: `${pillStyle.left + 4}px`,
               width: `${pillStyle.width}px`,
-              background: '#B8962E',
-              borderRadius: '30px',
-              boxShadow: '0 2px 14px rgba(184,150,46,0.32)',
-              transition: 'left 260ms cubic-bezier(0.16,1,0.3,1), width 260ms cubic-bezier(0.16,1,0.3,1)',
+              background: '#C5A059',
+              borderRadius: '1px',
+              transition: 'left 300ms cubic-bezier(0.16,1,0.3,1), width 300ms cubic-bezier(0.16,1,0.3,1)',
               pointerEvents: 'none',
             }} />
-
             {tabs.map((tab) => (
               <button
                 key={tab.key}
@@ -527,35 +698,32 @@ export default function PricingSection() {
                 style={{
                   position: 'relative',
                   zIndex: 1,
-                  padding: '9px 22px',
+                  padding: '10px 28px',
                   fontFamily: "'DM Sans', sans-serif",
-                  fontSize: '11.5px',
+                  fontSize: '10.5px',
                   fontWeight: 700,
-                  letterSpacing: '0.09em',
+                  letterSpacing: '0.14em',
                   textTransform: 'uppercase',
-                  borderRadius: '30px',
+                  borderRadius: '1px',
                   border: 'none',
                   cursor: 'pointer',
                   background: 'transparent',
-                  color: activeTab === tab.key ? '#fff' : 'rgba(30,25,15,0.40)',
-                  transition: 'color 200ms ease',
+                  color: activeTab === tab.key ? '#0A0907' : 'rgba(197,160,89,0.50)',
+                  transition: 'color 250ms ease',
                   whiteSpace: 'nowrap',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '6px',
                 }}
               >
                 {tab.label}
                 {tab.badge && (
                   <span style={{
-                    fontFamily: "'DM Sans', sans-serif",
                     fontSize: '8px',
                     fontWeight: 700,
                     letterSpacing: '0.10em',
-                    padding: '2px 6px',
-                    borderRadius: '10px',
-                    background: activeTab === tab.key ? 'rgba(255,255,255,0.25)' : 'rgba(184,150,46,0.13)',
-                    color: activeTab === tab.key ? '#fff' : '#7A5F15',
+                    padding: '2px 7px',
+                    borderRadius: '1px',
+                    background: activeTab === tab.key ? 'rgba(0,0,0,0.20)' : 'rgba(197,160,89,0.15)',
+                    color: activeTab === tab.key ? '#0A0907' : '#C5A059',
+                    marginLeft: '4px',
                   }}>
                     {tab.badge}
                   </span>
@@ -565,85 +733,86 @@ export default function PricingSection() {
           </div>
           <p style={{
             fontFamily: "'DM Sans', sans-serif",
-            fontSize: '10px',
-            color: 'rgba(30,25,15,0.27)',
-            letterSpacing: '0.13em',
+            fontSize: '9.5px',
+            color: 'rgba(197,160,89,0.30)',
+            letterSpacing: '0.16em',
             textTransform: 'uppercase',
           }}>
-            Limited onboarding capacity each month.
+            Limited mandates accepted each quarter
           </p>
         </div>
 
-        {/* Card Grid */}
+        {/* Cards */}
         <div
           role="tabpanel"
           style={{
             opacity: gridPhase === 'out' ? 0 : 1,
-            transform: gridPhase === 'out' ? 'translateY(14px)' : 'translateY(0)',
-            transition: 'opacity 220ms ease, transform 220ms ease',
+            transform: gridPhase === 'out' ? 'translateY(12px)' : 'translateY(0)',
+            transition: 'opacity 260ms ease, transform 260ms ease',
             display: 'grid',
-            gridTemplateColumns: plans.length === 3
-              ? 'repeat(auto-fit, minmax(280px, 1fr))'
-              : 'repeat(auto-fit, minmax(244px, 1fr))',
-            gap: '18px',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '16px',
             alignItems: 'stretch',
           }}
         >
-          {plans.map((plan) => (
-            <PricingCard key={plan.name} plan={plan} isAnnual={isAnnual} />
+          {plans.map((plan, i) => (
+            <PricingCard key={plan.name} plan={plan} index={i} />
           ))}
         </div>
 
-        {/* Section footer */}
-        <div style={{ marginTop: '58px' }}>
-          <div style={{ height: '1px', background: 'rgba(184,150,46,0.11)', marginBottom: '24px' }} />
-          <div style={{ textAlign: 'center' }}>
-            <p style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: '13px',
-              color: 'rgba(30,25,15,0.30)',
-              marginBottom: '6px',
-            }}>
-              Not sure which tier suits your goals?
-            </p>
-            <button
-              onClick={() => scrollTo('#contact')}
-              style={{
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: '13px',
-                color: '#8A6E1E',
-                letterSpacing: '0.04em',
-                background: 'none',
-                border: 'none',
-                borderBottom: '1px solid rgba(184,150,46,0.32)',
-                paddingBottom: '2px',
-                cursor: 'pointer',
-                transition: 'border-color 200ms ease',
-              }}
-              onMouseEnter={e => e.currentTarget.style.borderBottomColor = 'rgba(184,150,46,0.72)'}
-              onMouseLeave={e => e.currentTarget.style.borderBottomColor = 'rgba(184,150,46,0.32)'}
-            >
-              Book a strategy call.
-            </button>
+        {/* Footer */}
+        <div style={{ marginTop: '64px', textAlign: 'center' }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '28px',
+          }}>
+            <div style={{ flex: 1, maxWidth: '120px', height: '1px', background: 'rgba(184,150,46,0.15)' }} />
+            <div style={{ width: '4px', height: '4px', transform: 'rotate(45deg)', background: 'rgba(184,150,46,0.35)' }} />
+            <div style={{ flex: 1, maxWidth: '120px', height: '1px', background: 'rgba(184,150,46,0.15)' }} />
           </div>
+          <p style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: '13px',
+            color: 'rgba(197,160,89,0.35)',
+            marginBottom: '8px',
+          }}>
+            Unsure which mandate suits your current stage?
+          </p>
+          <button
+            onClick={() => scrollTo('#contact')}
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontSize: '16px',
+              fontStyle: 'italic',
+              color: '#C5A059',
+              background: 'none',
+              border: 'none',
+              borderBottom: '1px solid rgba(197,160,89,0.30)',
+              paddingBottom: '2px',
+              cursor: 'pointer',
+              transition: 'border-color 250ms ease, color 250ms ease',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderBottomColor = 'rgba(197,160,89,0.70)';
+              e.currentTarget.style.color = '#D4B77A';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderBottomColor = 'rgba(197,160,89,0.30)';
+              e.currentTarget.style.color = '#C5A059';
+            }}
+          >
+            Request a private consultation.
+          </button>
         </div>
       </div>
 
       <style>{`
-        @media (hover: hover) {
-          .pricing-card:hover {
-            transform: translateY(-4px) scale(1.01) !important;
-          }
-          .pricing-card:not(.featured):hover {
-            box-shadow: 0 14px 38px rgba(0,0,0,0.07), 0 4px 14px rgba(184,150,46,0.06) !important;
-            border-color: rgba(184,150,46,0.28) !important;
-          }
-          .pricing-card.featured:hover {
-            box-shadow: 0 16px 50px rgba(184,150,46,0.15), 0 4px 18px rgba(184,150,46,0.09) !important;
-            border-color: rgba(184,150,46,0.58) !important;
-          }
+        @keyframes fadeUpCard {
+          from { opacity: 0; transform: translateY(22px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
-        *:focus-visible { outline: 2px solid #B8962E; outline-offset: 3px; }
+        .pricing-card {
+          animation: fadeUpCard 600ms cubic-bezier(0.16,1,0.3,1) both;
+        }
       `}</style>
     </section>
   );

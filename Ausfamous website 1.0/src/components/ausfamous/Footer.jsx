@@ -71,15 +71,24 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-platinum/20">© 2026 Ausfamous. All rights reserved.</p>
           <div className="flex gap-3">
-            {['LinkedIn', 'Instagram', 'Facebook', 'YouTube'].map((name) => <a
+            {[
+              { name: 'LinkedIn', href: '#' },
+              { name: 'Instagram', href: 'https://www.instagram.com/aus.famous/' },
+              { name: 'TikTok', href: 'https://www.tiktok.com/@ausfamous.com' },
+              { name: 'Facebook', href: '#' },
+              { name: 'YouTube', href: '#' },
+            ].map(({ name, href }) => (
+              <a
                 key={name}
-                href="#"
+                href={href}
+                target={href !== '#' ? '_blank' : undefined}
+                rel={href !== '#' ? 'noopener noreferrer' : undefined}
                 className="w-10 h-10 rounded-full bg-platinum/[0.03] flex items-center justify-center hover:bg-gold transition-colors group"
-                aria-label={name}>
-              
+                aria-label={name}
+              >
                 <span className="text-[10px] font-bold text-platinum/30 group-hover:text-obsidian">{name[0]}</span>
               </a>
-            )}
+            ))}
           </div>
         </div>
       </div>
