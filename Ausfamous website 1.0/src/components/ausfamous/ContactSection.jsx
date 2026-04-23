@@ -1,124 +1,132 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import useScrollReveal from '../../hooks/useScrollReveal';
+import { base44 } from '@/api/base44Client';
+
+function generateCaptcha() {
+  const a = Math.floor(Math.random() * 9) + 1;
+  const b = Math.floor(Math.random() * 9) + 1;
+  return { a, b, answer: a + b };
+}
 
 export default function ContactSection() {
-  const [ref, visible] = useScrollReveal();
-  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '', honeypot: '' });
+  const [captcha, setCaptcha] = useState(generateCaptcha());
+  const [captchaInput, setCaptchaInput] = useState('');
+  const [status, setStatus] = useState('idle'); // idle | sending | success | error
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (form.honeypot) return; // bot trap
+    if (parseInt(captchaInput, 10) !== captcha.answer) {
+      alert('Incorrect answer — please try again.');
+      setCaptcha(generateCaptcha());
+      setCaptchaInput('');
+      return;
+    }
+    setStatus('sending');
+    try {
+      await base44.integrations.Core.SendEmail({
+        to: 'become@ausfamous.com',
+        subject: `New Enquiry from ${form.name}`,
+        body: `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\n\nMessage:\n${form.message}`,
+      });
+      setStatus('success');
+      setForm({ name: '', email: '', phone: '', message: '', honeypot: '' });
+      setCaptchaInput('');
+      setCaptcha(generateCaptcha());
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
-    <section id="contact" className="relative py-16 md:py-28 lg:py-40 bg-white overflow-hidden" ref={ref}>
-      <div className="absolute top-0 right-0 w-2/3 h-full bg-[radial-gradient(ellipse_at_80%_30%,rgba(197,160,89,0.10)_0%,transparent_50%)] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-5 md:px-10 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-          {/* Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={visible ? { opacity: 1, y: 0 } : {}}>
-            
-            <p className="text-[11px] font-bold tracking-[0.25em] uppercase text-gold mb-5">The Selection Phase</p>
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-medium text-obsidian leading-tight mb-6">
-              Your reputation is your most valuable asset. Build it deliberately.
-            </h2>
-            <p className="text-obsidian/50 leading-relaxed mb-10">
-              Book your Free Personal Brand Strategy Consultation today. No obligation. No pitch. Just a clear, honest look at where your brand is and where it can go.
-            </p>
-            <div className="space-y-4 text-obsidian/40 text-sm">
-              <p>📍 17 Ellesmere Road, Windsor VIC 3181</p>
-              <p>✉️ become@ausfamous.com.au</p>
-              <p>📞 <a href="tel:+61434820067" className="hover:text-gold transition-colors">+61 434 820 067</a></p>
-            </div>
-          </motion.div>
-
-          {/* Right - Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={visible ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 }}>
-            
-            {submitted ?
-            <div className="flex items-center justify-center h-full">
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-gold/20 flex items-center justify-center mx-auto mb-6">
-                    <svg className="w-8 h-8 text-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="20 6 9 17 4 12" /></svg>
-                  </div>
-                  <h3 className="font-display text-2xl text-obsidian mb-2">Thank you.</h3>
-                  <p className="text-obsidian/50">We will respond shortly.</p>
-                </div>
-              </div> :
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-[10px] font-bold tracking-widest uppercase text-obsidian/40 mb-2 block">First name</label>
-                    <input
-                    type="text"
-                    required
-                    value={form.firstName}
-                    onChange={(e) => setForm({ ...form, firstName: e.target.value })}
-                    className="w-full bg-transparent border-b-2 border-obsidian/15 focus:border-gold pb-3 pt-1 text-obsidian outline-none transition-colors placeholder:text-obsidian/20" />
-                  
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-bold tracking-widest uppercase text-obsidian/40 mb-2 block">Last name</label>
-                    <input
-                    type="text"
-                    required
-                    value={form.lastName}
-                    onChange={(e) => setForm({ ...form, lastName: e.target.value })}
-                    className="w-full bg-transparent border-b-2 border-obsidian/15 focus:border-gold pb-3 pt-1 text-obsidian outline-none transition-colors" />
-                  
-                  </div>
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold tracking-widest uppercase text-obsidian/40 mb-2 block">Email</label>
-                  <input
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full bg-transparent border-b-2 border-obsidian/15 focus:border-gold pb-3 pt-1 text-obsidian outline-none transition-colors" />
-                
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold tracking-widest uppercase text-obsidian/40 mb-2 block">Phone</label>
-                  <input
-                  type="tel"
-                  required
-                  value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                  className="w-full bg-transparent border-b-2 border-obsidian/15 focus:border-gold pb-3 pt-1 text-obsidian outline-none transition-colors" />
-                
-                </div>
-                <div>
-                  <label className="text-[10px] font-bold tracking-widest uppercase text-obsidian/40 mb-2 block">Message</label>
-                  <textarea
-                  rows={4}
-                  required
-                  value={form.message}
-                  onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="Share context in a few sentences."
-                  className="w-full bg-transparent border-b-2 border-obsidian/15 focus:border-gold pb-3 pt-1 text-obsidian outline-none transition-colors resize-none placeholder:text-obsidian/20" />
-                
-                </div>
-                <button
-                type="submit"
-                className="w-full py-5 text-sm font-bold tracking-widest uppercase bg-gold text-obsidian rounded-sm hover:bg-gold-light transition-all duration-300 shadow-lg shadow-gold/20 mt-4">
-                
-                  Apply Now
-                </button>
-              </form>
-            }
-          </motion.div>
+    <section id="contact" className="bg-obsidian py-24 md:py-32 px-5 md:px-10">
+      <div className="max-w-3xl mx-auto">
+        {/* Heading */}
+        <div className="text-center mb-14">
+          <p className="text-xs font-bold tracking-[0.26em] uppercase text-gold/50 mb-4">Begin Your Ascent</p>
+          <h2 className="font-display text-4xl md:text-5xl font-medium text-platinum mb-4">
+            Request a Free<br /><span className="text-gold italic">Brand Audit</span>
+          </h2>
+          <p className="text-sm text-platinum/40 max-w-md mx-auto leading-relaxed">
+            Tell us about yourself and your goals. We'll review your current presence and outline exactly what's possible.
+          </p>
         </div>
-      </div>
-    </section>);
 
+        {status === 'success' ? (
+          <div className="text-center py-16 border border-gold/20 rounded-sm bg-gold/5">
+            <p className="font-display text-2xl text-gold mb-3">Thank you.</p>
+            <p className="text-sm text-platinum/50">We'll be in touch within one business day.</p>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Honeypot */}
+            <input name="honeypot" value={form.honeypot} onChange={handleChange} style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
+            <div className="grid md:grid-cols-2 gap-5">
+              <div>
+                <label className="block text-xs font-semibold tracking-widest uppercase text-platinum/40 mb-2">Full Name *</label>
+                <input
+                  name="name" required value={form.name} onChange={handleChange}
+                  placeholder="Your name"
+                  className="w-full bg-graphene border border-gold/15 text-platinum placeholder-platinum/25 text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-gold/50 transition-colors"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold tracking-widest uppercase text-platinum/40 mb-2">Email *</label>
+                <input
+                  name="email" type="email" required value={form.email} onChange={handleChange}
+                  placeholder="your@email.com"
+                  className="w-full bg-graphene border border-gold/15 text-platinum placeholder-platinum/25 text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-gold/50 transition-colors"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold tracking-widest uppercase text-platinum/40 mb-2">Phone</label>
+              <input
+                name="phone" value={form.phone} onChange={handleChange}
+                placeholder="+61 000 000 000"
+                className="w-full bg-graphene border border-gold/15 text-platinum placeholder-platinum/25 text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-gold/50 transition-colors"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold tracking-widest uppercase text-platinum/40 mb-2">Message *</label>
+              <textarea
+                name="message" required value={form.message} onChange={handleChange}
+                rows={5} placeholder="Tell us about your goals and current visibility..."
+                className="w-full bg-graphene border border-gold/15 text-platinum placeholder-platinum/25 text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-gold/50 transition-colors resize-none"
+              />
+            </div>
+
+            {/* Captcha */}
+            <div className="flex items-center gap-4">
+              <label className="text-xs font-semibold tracking-widest uppercase text-platinum/40 shrink-0">
+                {captcha.a} + {captcha.b} = ?
+              </label>
+              <input
+                type="number" required value={captchaInput} onChange={e => setCaptchaInput(e.target.value)}
+                placeholder="Answer"
+                className="w-28 bg-graphene border border-gold/15 text-platinum placeholder-platinum/25 text-sm px-4 py-3 rounded-sm focus:outline-none focus:border-gold/50 transition-colors"
+              />
+            </div>
+
+            {status === 'error' && (
+              <p className="text-xs text-red-400">Something went wrong. Please try again or email us directly.</p>
+            )}
+
+            <button
+              type="submit"
+              disabled={status === 'sending'}
+              className="w-full py-4 text-xs font-bold tracking-widest uppercase bg-gold text-obsidian rounded-sm hover:bg-gold-light transition-all duration-300 disabled:opacity-50"
+            >
+              {status === 'sending' ? 'Sending…' : 'Submit Enquiry'}
+            </button>
+          </form>
+        )}
+      </div>
+    </section>
+  );
 }

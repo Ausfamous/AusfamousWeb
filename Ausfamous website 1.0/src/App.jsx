@@ -7,6 +7,11 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 // Add page imports here
 import Home from './pages/Home';
+import Newsroom from './pages/Newsroom';
+import NewsroomArticlePage from './pages/NewsroomArticlePage';
+import AdminNewsroom from './pages/AdminNewsroom';
+import AdminUsers from './pages/AdminUsers';
+import AdminLogs from './pages/AdminLogs';
 
 const AuthenticatedApp = () => {
   const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
@@ -35,6 +40,11 @@ const AuthenticatedApp = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/newsroom" element={<Newsroom />} />
+      <Route path="/newsroom/:slug" element={<NewsroomArticlePage />} />
+      <Route path="/admin/newsroom" element={<AdminNewsroom />} />
+      <Route path="/admin/users" element={<AdminUsers />} />
+      <Route path="/admin/logs" element={<AdminLogs />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
